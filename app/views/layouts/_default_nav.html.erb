@@ -1,0 +1,23 @@
+<% if current_user %> 
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to "WriterShare", users_path, class: "navbar-brand" %>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       
+        <ul class="nav navbar-nav navbar-right">
+          <% current_user.avatar_file_name %>
+            <li><%= link_to "See My Tasks", tasks_path(current_user) %></li>
+            <li><%= link_to "Add a New Task", new_task_path(current_user) %></li>
+            <li class="divider"></li>
+            <li><%= link_to "View My Profile", user_path(current_user) %></li>
+            <li><%= link_to "Edit My Profile", edit_user_path(current_user) %></li>
+             <li><%= link_to "Log Out", new_session_path, method: :delete %></li>
+            <li class="divider"></li>
+          <% end %> 
+        </ul>
+      </div>
+    </div>
+  </nav>

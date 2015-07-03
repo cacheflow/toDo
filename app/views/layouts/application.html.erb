@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ToDo</title>
+  <%= stylesheet_link_tag 'application'%>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<% if current_user %> 
+  <%= render partial: "layouts/default_nav" %> 
+<% else %> 
+  <% render partial: "layouts/unregistered" %> 
+<% end %> 
+<%= yield %>
+
+</body>
+</html>
