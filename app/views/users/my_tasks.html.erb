@@ -1,0 +1,11 @@
+<% @my_tasks.each do |task| %>
+  <%= form_for [current_user, task] do |f| %>
+    <%= task.item %>
+    <%= task.completed %> 
+    <%= f.hidden_field :completed, value: true %> 
+
+    
+    <%= f.submit 'mark as completed'%>
+  <% end %>
+<% end %>
+

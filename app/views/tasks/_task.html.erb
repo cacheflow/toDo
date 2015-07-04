@@ -1,0 +1,7 @@
+ <li> 
+    <%= task.item.capitalize %> by <%= link_to task.user.name.capitalize, user_path(task.user) %> 
+    <% if current_user %> 
+     <%= link_to "Edit my task", edit_task_path(id: task.id, method: :get) %> 
+    <% end %> 
+    <%= link_to image_tag(task.user.avatar(:medium)), user_path(task.user) %> 
+  </li>

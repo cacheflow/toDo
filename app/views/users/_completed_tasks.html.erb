@@ -1,0 +1,7 @@
+ <li> 
+    <%= completed_completed_task.item.capitalize %> by <%= link_to completed_task.user.name.capitalize, user_path(completed_task.user) %> 
+    <% if current_user %> 
+     <%= link_to "Edit my completed_task", edit_completed_task_path(id: completed_task.id, method: :get) %> 
+    <% end %> 
+    <%= link_to image_tag(completed_task.user.avatar(:medium)), user_path(completed_task.user) %> 
+  </li>

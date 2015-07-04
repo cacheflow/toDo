@@ -2,34 +2,29 @@ class TasksController < ApplicationController
   before_action :find_task, :only => [:edit, :update, :show, :destroy]
 
   def index 
-    @tasks = Task.all 
-  end 
+    @tasks = Task.order(created_at: :desc).where(completed: false)
+  end   
 
   def new 
-    @task = Task.new(task_params)
+    @task = Task.new 
   end 
 
   def create 
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(tasks_params)
     if @task.save 
       redirect_to tasks_path
     else 
       render :new 
     end 
-  end 
+  end
 
-  def find_task 
-    @task = Task.find(params[:id])
-  end 
 
   def show 
   end 
 
-  def edit 
-  end 
 
   def update
-    if @task.update(task_params)
+    if @task.update(tasks_params)
       redirect_to tasks_path(@path)
     else 
       render :edit 
@@ -39,10 +34,14 @@ class TasksController < ApplicationController
   def destroy 
   end 
 
-  protected 
-    def task_params
-      params.fetch(:task, {}).permit(:item, :user_id)
-    end 
 
+  protected 
+    def tasks_params
+      params.require(:task).permit(:item, :completed, :deleted_at)
+    end  
+
+    def find_task 
+      @task = Task.find(params[:id])
+    end 
 
 end

@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
-  get "signup" => "users#new"
-  get "login" => "sessions#new"
-  get "logout" => "sessions#destroy"
+  get "signup", to: "users#new"
+  get "login", to: "sessions#new"
+  get "logout", to: "sessions#destroy"  
+  get "completed", to: "users#completed_tasks"
+  resources :users do 
+    resources :tasks, controller: 'users/tasks'
+    get "my_tasks", to: "users#my_tasks"
+    put ":task_id/completed/", to: "users#mark_completed", as: "completed"
+  end 
 
-  resources :users
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
