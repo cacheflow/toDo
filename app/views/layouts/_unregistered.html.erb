@@ -1,17 +1,5 @@
-<nav class="navbar navbar-inverse" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <%= link_to "ToDo", users_path, class: "navbar-brand" %>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-     
-      <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "See all tasks", tasks_path %> </li>
-          <li><%= link_to "Login", new_session_path %></li>
-          <li><%= link_to "Signup", new_user_path %> </li>
-          <li class="divider"></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><%= link_to "Home",root_path %> </li>
+  <li role="presentation"><%= link_to "Sign up", new_user_path %>  </li>
+  <li role="presentation"><%= link_to "Login", new_session_path %> </li>
+</ul>

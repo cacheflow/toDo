@@ -1,5 +1,5 @@
 <% if current_user %> 
-  <%= form_for @task do |f| %> 
+  <%= bootstrap_form_for @task do |f| %> 
     <%= f.text_field :item, placeholder: "Enter an item you want to add" %> 
     <%= f.submit %>
   <% end %>  

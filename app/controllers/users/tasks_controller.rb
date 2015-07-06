@@ -2,17 +2,11 @@ class Users::TasksController < ApplicationController
   before_action :find_task
 
   def update
-    if params[:task][:completed] == "true"
-      puts "THIS IS TRUE NIGGA"
-      @task.update(tasks_params)
-      redirect_to tasks_path(@path)
+    if @task.update(tasks_params)
+      redirect_to user_my_tasks_path
     else 
       render :edit 
     end 
-  end 
-
-  
-  def edit 
   end 
 
   private

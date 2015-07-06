@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, :only => [:edit, :update, :show, :destroy]
 
   def index 
-    @tasks = Task.order(created_at: :desc).where(completed: false)
+    @tasks = Task.order(created_at: :desc)
   end   
 
   def new 
@@ -20,12 +20,13 @@ class TasksController < ApplicationController
 
 
   def show 
+    @task = Task.includes(:users).find(params[:id])
   end 
 
 
   def update
     if @task.update(tasks_params)
-      redirect_to tasks_path(@path)
+      redirect_to user_my_tasks_path(@task)
     else 
       render :edit 
     end 

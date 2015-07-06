@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_action :find_user, :only => [:edit, :update, :show, :destroy, :mark_completed]
+  before_action :find_user, :only => [:edit, :update, :destroy, :mark_completed]
 
 
   def show 
-    @user = User.includes(:tasks).find(params[:id])
+    @user = User.find(params[:id])
   end 
 
   def new 
@@ -39,14 +39,7 @@ class UsersController < ApplicationController
       redirect_to @user 
     end 
   end 
-
-  def mark_completed 
-    @task = current_user.tasks.find_by(id: params[:task_id])
-    @task.update(task_params)
-    raise
-    flash[:success] = "You've marked that task as completed"
-    redirect_to user_path(@user) 
-  end 
+    
 
   def destroy
     flash[:success] = "Account deleted"

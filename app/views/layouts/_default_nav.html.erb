@@ -1,24 +1,45 @@
-<% if current_user %> 
-  <nav class="navbar navbar-inverse" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <%= link_to "ToDo", root_path, class: "navbar-brand" %>
-      </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><%= link_to "ToDo", root_path, class: "navbar-brand" %>
+      </a>
+    </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-       
-        <ul class="nav navbar-nav navbar-right">
-          <% current_user.avatar(:thumb) %>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
+          <ul class="dropdown-menu">
             <li><%= link_to "Add a New Task", new_task_path(current_user) %></li>
+            <li><%=link_to "All tasls", tasks_path %> </li>
             <li><%= link_to "My tasks", user_my_tasks_path(current_user) %> </li>
             <li class="divider"></li>
-            <li><%= link_to "View My Profile", user_path(current_user) %></li>
+             <li><%= link_to "Completed Tasks", completed_path %></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %>  <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+             <li><%= link_to "View My Profile", user_path(current_user) %></li>
             <li><%= link_to "Edit My Profile", edit_user_path(current_user) %></li>
-             <li><%= link_to "Log Out", new_session_path, method: :delete %></li>
-             <li><%= link_to "Completed Tasks", completed_path %> </li>
-            <li class="divider"></li>
-          <% end %> 
-        </ul>
-      </div>
+             <li><%= link_to "Log Out", new_session_path, :method => :delete %></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>

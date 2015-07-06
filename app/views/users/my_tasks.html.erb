@@ -1,11 +1,10 @@
 <% @my_tasks.each do |task| %>
-  <%= form_for [current_user, task] do |f| %>
-    <%= task.item %>
-    <%= task.completed %> 
-    <%= f.hidden_field :completed, value: true %> 
+  <%= bootstrap_form_for [current_user, task] do |f| %>
+  <%= task.item %> <%= link_to "Edit this task", edit_task_path(task.id), class: "btn btn-default" %> 
+  <%= f.hidden_field :completed, value: true %> 
 
-    
-    <%= f.submit 'mark as completed'%>
+    <%#=link_to "Mark as completed", user_task_path(current_user, task.id), method: :put, params: {completed: true} %> 
+    <%= f.submit 'mark as completed', class: "btn btn-success" %>
   <% end %>
 <% end %>
 
