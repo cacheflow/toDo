@@ -6,7 +6,6 @@
   <%=u.file_field :avatar %>
   <%=u.password_field :password, placeholder: 'password' %>
   <%=u.hidden_field :created_at %> 
-  <%= link_to "Edit Tasks", user_tasks_path(current_user) %> 
   <%=u.submit "Update" %>  
 <% end %> 
 

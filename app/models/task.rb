@@ -5,7 +5,6 @@ class Task < ActiveRecord::Base
   validates_presence_of :item
   before_create :set_completed_status
   acts_as_paranoid
-
   def set_completed_status 
     !self.completed = false 
   end 

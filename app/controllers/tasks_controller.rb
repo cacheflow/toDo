@@ -6,23 +6,21 @@ class TasksController < ApplicationController
   end   
 
   def new 
-    @task = Task.new 
+    @task = Task.new
   end 
 
   def create 
     @task = current_user.tasks.new(tasks_params)
+    respond_to do |format|
     if @task.save 
-      redirect_to tasks_path
-    else 
-      render :new 
+        format.html
+        format.js
+      else
+        format.html { render :new }
+        format.js
+      end
     end 
   end
-
-
-  def show 
-    @task = Task.includes(:users).find(params[:id])
-  end 
-
 
   def update
     if @task.update(tasks_params)
@@ -33,6 +31,8 @@ class TasksController < ApplicationController
   end 
 
   def destroy 
+    @task.destroy 
+    redirect_to user_my_tasks_path(@task)
   end 
 
 
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
     end  
 
     def find_task 
-      @task = Task.find(params[:id])
+      @task = Task.includes(:user).find(params[:id])
     end 
 
 end

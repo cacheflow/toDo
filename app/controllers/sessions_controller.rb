@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.where(email: params[:session][:email]).first
     if user && user.authenticate(params[:session][:password])
       login(user)
-      redirect_to root_url
+      redirect_to tasks_path
       flash[:success] = "You've successfully logged in"
     else 
       flash[:warning] = "Uh oh doesn't seem to be right. Try to login again"

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, :only => [:edit, :update, :destroy, :mark_completed]
+  before_action :find_user, :only => [:edit, :update, :destroy, :mark_completed, :deleted_tasks]
 
 
   def show 
@@ -10,12 +10,22 @@ class UsersController < ApplicationController
     @user = User.new 
   end 
 
-  def my_tasks  
-    @my_tasks = current_user.tasks.where(completed: false)
+  def my_tasks 
+    @task = Task.new 
+    @my_tasks = current_user.tasks.where(completed: false).where(deleted_at: nil)
+    respond_to do |format|
+      format.js
+      format.html
+    end
+    if params[:search]
+      @my_tasks = current_user.tasks.search(params[:search]).order("created_at")
+    else 
+      @my_tasks = current_user.tasks.where(completed: false).where(deleted_at: nil)
+    end
   end 
 
   def completed_tasks 
-    @completed_tasks = current_user.tasks.where(completed: true)
+    @completed = current_user.tasks.where(completed: true)
   end 
 
   def find_user 
@@ -38,6 +48,11 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @user 
     end 
+  end 
+
+  def deleted_tasks 
+    @deleted = current_user.tasks.only_deleted
+    redirect_to tasks_path(current_user)
   end 
     
 

@@ -1,1 +1,15 @@
-<%= render partial: "tasks/form" %> 
+<div class="container">
+  <% if current_user %> 
+    <%= bootstrap_form_for @task, remote: true do |f| %> 
+      <%= f.text_field :item, placeholder: "Enter an item you want to add" %> 
+      <div class='text-center'>
+        <%= f.submit %>
+      </div>
+    <% end %>  
+  <% else %> 
+    <%= render partial: "sessions/form" %> 
+  <% end %> 
+</div>
+<div id="inline-task">
+  <%= render partial: "users/inline_tasks" %>   
+</div>

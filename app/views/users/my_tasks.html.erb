@@ -1,10 +1,15 @@
-<% @my_tasks.each do |task| %>
-  <%= bootstrap_form_for [current_user, task] do |f| %>
-  <%= task.item %> <%= link_to "Edit this task", edit_task_path(task.id), class: "btn btn-default" %> 
-  <%= f.hidden_field :completed, value: true %> 
-
-    <%#=link_to "Mark as completed", user_task_path(current_user, task.id), method: :put, params: {completed: true} %> 
-    <%= f.submit 'mark as completed', class: "btn btn-success" %>
-  <% end %>
-<% end %>
-
+<div class="container">
+  <% if current_user %> 
+    <%= bootstrap_form_for @task, remote: true do |f| %> 
+      <%= f.text_field :item, placeholder: "Enter an item you want to add" %> 
+      <div class='text-center'>
+        <%= f.submit %>
+      </div>
+    <% end %>  
+  <% else %> 
+    <%= render partial: "sessions/form" %> 
+  <% end %> 
+</div>
+<div id="inline-task">
+  <%= render partial: "inline_tasks" %>   
+</div>

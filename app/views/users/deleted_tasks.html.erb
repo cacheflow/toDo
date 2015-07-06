@@ -1,0 +1,11 @@
+<% @deleted.each do |delete| %> 
+    <%= bootstrap_form_for [current_user, delete] do |f| %>
+        <div class="col-md-6 col-md-offset-2">
+            <%= delete.item.capitalize %> by 
+        </div> 
+        <div class="col-md-3">
+            <%= f.hidden_field :deleted_at, value: nil %> 
+            <%= f.submit 'Undo delete', class: "btn btn-success" %>
+        </div>
+    <% end %> 
+<% end %> 

@@ -10,5 +10,7 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-
+  def self.search(query)
+    all.joins(:user).where('users.name ILIKE ? OR items.name ILIKE ?',"%#{query}%", "%#{query}%")
+  end 
 end

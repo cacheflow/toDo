@@ -1,22 +1,14 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-6" id="search">
+<% @completed.each do |complete| %> 
+    <%= bootstrap_form_for [current_user, complete] do |f| %>
+        <div class="col-md-6 col-md-offset-2">
+            <%= complete.item.capitalize %> by 
+            <%= link_to complete.user.name.capitalize, user_path(complete.user) %> 
+        </div> 
+        <div class="col-md-3">
+            <%= link_to "Edit my task", edit_task_path(id: complete.id, method: :get) %> 
+            <%= link_to image_tag(complete.user.avatar(:medium)), user_path(complete.user) %> 
+            <%= f.hidden_field :completed, value: false %> 
+            <%= f.submit 'mark as uncompleted', class: "btn btn-success" %>
         </div>
-        <div class="col-md-2"></div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <ul>                  
-              <li>
-                 <%= render @completed_tasks %>
-              </li>   
-            </ul>
-        </div>
-        <div class="col-md-4"></div>
-    </div>
-</div>
+    <% end %> 
+<% end %> 
