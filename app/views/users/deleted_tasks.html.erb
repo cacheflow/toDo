@@ -5,7 +5,6 @@
   </div>
 </div>
 <% @deleted.each do |delete| %> 
-
     <%= bootstrap_form_for [current_user, delete] do |f| %>
         <div class="col-md-6 col-md-offset-2">
             <%= delete.item.capitalize %> by Me
