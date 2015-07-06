@@ -1,7 +1,11 @@
 <% if current_user %> 
-  <p>Hello <%= current_user.name%> no need to login in
+  <div class="container">
+  <div class="jumbotron">
+    <h1>ToDo</h1> 
+    <p>Hello <%= current_user.name%> no need to login in
   go back and have some <%=link_to "fun.", users_path %> 
   </p>
+  </div>
 <% else %> 
 <%= render partial: "layouts/unregistered" %>  
   <h1>Log In</h1>
@@ -11,5 +15,5 @@
       <%= f.password_field :password, required: true, placeholder: 'password', class: "form-control" %>
     <%= f.submit "Log in", class: 'btn btn-info' %>
     <% end %>
+    <%=link_to "Sign up", new_user_path, class: "btn btn-primary" %> 
  <% end %>  
-<%=link_to "Sign up", new_user_path %> 

@@ -15,3 +15,8 @@
  *= require rails_bootstrap_forms
  *= require_self
  */
+
+#search_form {
+  padding: 10px;
+  float: right;
+}
