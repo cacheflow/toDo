@@ -2,7 +2,11 @@ class TasksController < ApplicationController
   before_action :find_task, :only => [:edit, :update, :show, :destroy]
 
   def index 
-    @tasks = Task.order(created_at: :desc)
+    if params[:search].present?
+      @tasks = Task.search(params[:search])
+    else 
+      @tasks = Task.order(created_at: :desc)
+    end 
   end   
 
   def new 
@@ -11,14 +15,8 @@ class TasksController < ApplicationController
 
   def create 
     @task = current_user.tasks.new(tasks_params)
-    respond_to do |format|
     if @task.save 
-        format.html
-        format.js
-      else
-        format.html { render :new }
-        format.js
-      end
+      redirect_to user_my_tasks_path(@task)
     end 
   end
 

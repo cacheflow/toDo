@@ -12,20 +12,15 @@ class UsersController < ApplicationController
 
   def my_tasks 
     @task = Task.new 
-    @my_tasks = current_user.tasks.where(completed: false).where(deleted_at: nil)
+    @my_tasks = current_user.tasks.not_completed.not_deleted
     respond_to do |format|
       format.js
       format.html
     end
-    if params[:search]
-      @my_tasks = current_user.tasks.search(params[:search]).order("created_at")
-    else 
-      @my_tasks = current_user.tasks.where(completed: false).where(deleted_at: nil)
-    end
   end 
 
   def completed_tasks 
-    @completed = current_user.tasks.where(completed: true)
+    @completed = current_user.tasks.completed
   end 
 
   def find_user 
@@ -52,7 +47,6 @@ class UsersController < ApplicationController
 
   def deleted_tasks 
     @deleted = current_user.tasks.only_deleted
-    redirect_to tasks_path(current_user)
   end 
     
 

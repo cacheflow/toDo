@@ -1,6 +1,6 @@
 <div class="container">
   <% if current_user %> 
-    <%= bootstrap_form_for @task, remote: true do |f| %> 
+    <%= bootstrap_form_for @task do |f| %> 
       <%= f.text_field :item, placeholder: "Enter an item you want to add" %> 
       <div class='text-center'>
         <%= f.submit %>
@@ -11,5 +11,6 @@
   <% end %> 
 </div>
 <div id="inline-task">
-  <%= render partial: "inline_tasks" %>   
+  <%= render partial: "inline_tasks", object: @my_tasks %>   
 </div>
+
