@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "deleted", to: "users#deleted_tasks"
   get "logout", to: "sessions#destroy"  
   get "completed", to: "users#completed_tasks"
+  post "restore_task/tasks/:task_id", to: "users#restore_task", as: "restore_task"
   resources :users do 
     resources :tasks, controller: 'users/tasks'
     get "my_tasks", to: "users#my_tasks"

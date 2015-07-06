@@ -2,7 +2,7 @@
   <div class="container">
   <div class="jumbotron">
     <h1>ToDo</h1> 
-    <p>Hello <%= current_user.name%> no need to login in
+    <p>Hello <%= current_user.name.capitalize%> no need to login in
   go back and have some <%=link_to "fun.", tasks_path %> 
   </p>
   </div>

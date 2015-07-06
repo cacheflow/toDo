@@ -48,7 +48,13 @@ class UsersController < ApplicationController
   def deleted_tasks 
     @deleted = current_user.tasks.only_deleted
   end 
-    
+  
+  def restore_task 
+    @task_restore = current_user.tasks.only_deleted
+    if @task_restore.restore(@task_restore) 
+      redirect_to deleted_path(@task)
+    end 
+  end 
 
   def destroy
     flash[:success] = "Account deleted"

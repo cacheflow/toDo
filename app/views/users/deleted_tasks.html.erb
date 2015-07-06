@@ -4,13 +4,11 @@
     <p>Below are your deleted tasks. We're working on a cool recovery feature, so in case you ever delete them, you can get them back!</p>
   </div>
 </div>
-<% @deleted.each do |delete| %> 
-    <%= bootstrap_form_for [current_user, delete] do |f| %>
-        <div class="col-md-6 col-md-offset-2">
-            <%= delete.item.capitalize %> by Me
-        </div> 
-        <div class="col-md-3">
-        </div>
-    <% end %> 
+<% @deleted.each do |undo_delete| %> 
+    <div class="col-md-6 col-md-offset-2">
+        <%= undo_delete.item.capitalize %> by Me <%=button_to "Restore All Deleted Tasks", restore_task_path(undo_delete.id), method: :post, class: "btn btn-primary" %> 
+    </div> 
+    <div class="col-md-3">
+    </div>
 <% end %> 
 

@@ -1,6 +1,6 @@
 <% @completed.each do |complete| %> 
     <%= complete.item.capitalize %> by <%= link_to complete.user.name.capitalize, user_path(complete.user) %> 
-      SON <%= link_to "Edit my complete", edit_complete_path(id: complete.id, method: :get) %> 
+       <%= link_to "Edit my complete", edit_complete_path(id: complete.id, method: :get) %> 
      <%= link_to image_tag(complete.user.avatar(:medium)), user_path(complete.user) %> 
-    <% end %> 
+<% end %> 
     

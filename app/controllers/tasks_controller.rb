@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, :only => [:edit, :update, :show, :destroy]
+  before_action :find_task, :only => [:edit, :update, :show, :destroy, :find_task]
 
   def index 
     if params[:search].present?
@@ -32,6 +32,13 @@ class TasksController < ApplicationController
     @task.destroy 
     redirect_to user_my_tasks_path(@task)
   end 
+
+  def restore_task 
+    if @task.restore
+      redirect_to user_my_tasks_path(@task)
+    end
+  end  
+
 
 
   protected 
