@@ -45,6 +45,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-expectations'
   gem 'shoulda-matchers'
+  gem 'factory_girl'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
