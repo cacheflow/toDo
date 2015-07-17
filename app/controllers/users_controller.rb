@@ -2,71 +2,71 @@ class UsersController < ApplicationController
   before_action :find_user, :only => [:edit, :update, :destroy, :mark_completed, :deleted_tasks]
 
 
-  def show 
+  def show
     @user = User.find(params[:id])
-  end 
+  end
 
-  def new 
-    @user = User.new 
-  end 
+  def new
+    @user = User.new
+  end
 
-  def my_tasks 
-    @task = Task.new 
+  def my_tasks
+    @task = Task.new
     @my_tasks = current_user.tasks.not_completed.not_deleted
     respond_to do |format|
       format.js
       format.html
     end
-  end 
+  end
 
-  def completed_tasks 
+  def completed_tasks
     @completed = current_user.tasks.completed
-  end 
+  end
 
-  def find_user 
-    @user = current_user 
-  end 
+  def find_user
+    @user = current_user
+  end
 
   def create
     @user = User.new(user_params)
     if @user.save
       login(@user)
       flash[:info] = "You successfully created an account and logged in"
-      redirect_to root_url 
-    else 
-      render :new 
-    end 
-  end 
+      redirect_to root_url
+    else
+      render :new
+    end
+  end
 
-  def update 
+  def update
     if @user.update(user_params)
       flash[:success] = "Profile updated"
-      redirect_to @user 
-    end 
-  end 
+      redirect_to @user
+    end
+  end
 
-  def deleted_tasks 
+  def deleted_tasks
     @deleted = current_user.tasks.only_deleted
-  end 
-  
-  def restore_task 
+  end
+
+  def restore_task
     @task_restore = current_user.tasks.only_deleted
-    if @task_restore.restore(@task_restore) 
+    if @task_restore.restore(@task_restore)
       redirect_to deleted_path(@task)
-    end 
-  end 
+    end
+  end
 
   def destroy
     flash[:success] = "Account deleted"
     redirect_to users_url
-  end 
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :avatar)
-  end 
+  end
 
-  def task_params 
+  def task_params
     params.require(:task).permit(:item, :completed)
-  end 
+  end
 
-end 
+end

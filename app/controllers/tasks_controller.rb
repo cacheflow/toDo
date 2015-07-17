@@ -1,53 +1,53 @@
 class TasksController < ApplicationController
   before_action :find_task, :only => [:edit, :update, :show, :destroy, :find_task]
 
-  def index 
+  def index
     if params[:search].present?
       @tasks = Task.search(params[:search])
-    else 
+    else
       @tasks = Task.order(created_at: :desc)
-    end 
-  end   
+    end
+  end
 
-  def new 
+  def new
     @task = Task.new
-  end 
+  end
 
-  def create 
+  def create
     @task = current_user.tasks.new(tasks_params)
-    if @task.save 
+    if @task.save
       redirect_to user_my_tasks_path(@task)
-    end 
+    end
   end
 
   def update
     if @task.update(tasks_params)
       redirect_to user_my_tasks_path(@task)
-    else 
-      render :edit 
-    end 
-  end 
+    else
+      render :edit
+    end
+  end
 
-  def destroy 
-    @task.destroy 
+  def destroy
+    @task.destroy
     redirect_to user_my_tasks_path(@task)
-  end 
+  end
 
-  def restore_task 
+  def restore_task
     if @task.restore
       redirect_to user_my_tasks_path(@task)
     end
-  end  
+  end
 
 
 
-  protected 
+  protected
     def tasks_params
       params.require(:task).permit(:item, :completed, :deleted_at)
-    end  
+    end
 
-    def find_task 
+    def find_task
       @task = Task.includes(:user).find(params[:id])
-    end 
+    end
 
 end

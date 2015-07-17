@@ -1,14 +1,21 @@
 <div class="container">
   <div class="jumbotron">
-    <h1>Deleted Tasks</h1> 
+    <h1>Deleted Tasks</h1>
     <p>Below are your deleted tasks. We're working on a cool recovery feature, so in case you ever delete them, you can get them back!</p>
   </div>
+  <%=button_to "Restore All Deleted Tasks", restore_task_path(@deleted), method: :post, class: "btn btn-primary" %>
 </div>
-<% @deleted.each do |undo_delete| %> 
-    <div class="col-md-6 col-md-offset-2">
-        <%= undo_delete.item.capitalize %> by Me <%=button_to "Restore All Deleted Tasks", restore_task_path(undo_delete.id), method: :post, class: "btn btn-primary" %> 
-    </div> 
-    <div class="col-md-3">
+<% @deleted.each do |deleted_item| %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="box">
+            <div class="info">
+              <h4 class="text-center">Task</h4>
+                <p> <%= deleted_item.item.capitalize %> by Me</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-<% end %> 
-
+<% end %>

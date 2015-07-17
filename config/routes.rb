@@ -6,14 +6,12 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
   get "completed", to: "users#completed_tasks"
   post "restore_task/tasks/:task_id", to: "users#restore_task", as: "restore_task"
-  get "users/:user_id/my_tasks", to: "users#my_tasks", as: "my_tasks"
-  get "my_tasks", to: "users#my_tasks"
-  resources :users 
+  get "my_tasks", to: "users#my_tasks", as: "my_tasks"
+  resources :users do
+    resources :tasks, controller: 'users/tasks'
+    get "my_tasks", to: "users#my_tasks", as: "my_tasks"
+  end
 
-  #   resources :tasks, controller: 'users/tasks'
-  #   get "my_tasks", to: "users#my_tasks"
-  # end
-  #
 
 
   # The priority is based upon order of creation: first created -> highest priority.
