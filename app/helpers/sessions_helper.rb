@@ -9,7 +9,6 @@ module SessionsHelper
     @current_user ||= session[:remember_token] && User.find(session[:remember_token])
   end
 
-
   def logout
     session.delete(:user_id)
     @current_user = nil
