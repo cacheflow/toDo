@@ -1,3 +1,6 @@
 --color
 --require spec_helper
 --require rails_helper
+--require support/render_views
+--require support/login_helper
+--require support/url_helpers

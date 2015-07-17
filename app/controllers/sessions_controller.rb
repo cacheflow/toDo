@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
+
   def new
   end
 
@@ -8,10 +10,10 @@ class SessionsController < ApplicationController
       login(user)
       redirect_to tasks_path
       flash[:success] = "You've successfully logged in"
-    else 
+    else
       flash[:warning] = "Uh oh doesn't seem to be right. Try to login again"
-      render :new 
-    end   
+      render :new
+    end
   end
 
   def destroy

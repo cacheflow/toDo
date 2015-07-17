@@ -3,19 +3,22 @@ Rails.application.routes.draw do
   get "signup", to: "users#new"
   get "login", to: "sessions#new"
   get "deleted", to: "users#deleted_tasks"
-  get "logout", to: "sessions#destroy"  
+  get "logout", to: "sessions#destroy"
   get "completed", to: "users#completed_tasks"
   post "restore_task/tasks/:task_id", to: "users#restore_task", as: "restore_task"
-  resources :users do 
-    resources :tasks, controller: 'users/tasks'
-    get "my_tasks", to: "users#my_tasks"
-  end 
+  get "users/:user_id/my_tasks", to: "users#my_tasks", as: "my_tasks"
+  get "my_tasks", to: "users#my_tasks"
+  resources :users 
 
+  #   resources :tasks, controller: 'users/tasks'
+  #   get "my_tasks", to: "users#my_tasks"
+  # end
+  #
 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :tasks 
+  resources :tasks
   root "sessions#new"
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

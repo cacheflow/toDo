@@ -1,19 +1,19 @@
-<% if current_user %> 
+<% if current_user %>
   <div class="container">
   <div class="jumbotron">
-    <h1>ToDo</h1> 
+    <h1>ToDo</h1>
     <p>Hello <%= current_user.name.capitalize%> no need to login in
-  go back and have some <%=link_to "fun.", tasks_path %> 
+  go back and have some <%=link_to "fun.", tasks_path %>
   </p>
   </div>
-<% else %> 
-<%= render partial: "layouts/unregistered" %>  
+<% else %>
+<%= render partial: "layouts/unregistered" %>
   <h1>Log In</h1>
     <%= bootstrap_form_for :session, html: {'data-parsley-validate' => ''}, :url => sessions_path do |f| %>
       <%=f.email_field :email, required: true, 'data-parsley-type' => 'email',
-    'data-parsley-trigger' => 'blur', placeholder: 'email', class: "form-control" %>  
+    'data-parsley-trigger' => 'blur', placeholder: 'email', class: "form-control" %>
       <%= f.password_field :password, required: true, placeholder: 'password', class: "form-control" %>
     <%= f.submit "Log in", class: 'btn btn-info' %>
     <% end %>
-    Don't have an account? Try <%=link_to "Signing up", new_user_path %> 
- <% end %>  
+    Don't have an account? Try <%=link_to "Signing up", new_user_path %>
+<% end %>  
